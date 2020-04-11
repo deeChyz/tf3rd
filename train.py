@@ -14,7 +14,6 @@ import time
 from tensorflow.python import keras as keras
 from tensorflow.python.keras.callbacks import LearningRateScheduler
 
-
 LOG_DIR = 'logs'
 SHUFFLE_BUFFER = 10
 BATCH_SIZE = 8
@@ -87,35 +86,11 @@ class Validation(tf.keras.callbacks.Callback):
  
 
 def build_model():
+    base_model = tf.keras.applications.VGG16(include_top=False, weights='imagenet', input_shape=(224,224,3), classes=2)
+    base_model.trainable = False
     return tf.keras.models.Sequential([
-        tf.keras.layers.Input(shape=(224,224,3)),
-        tf.keras.layers.Conv2D(filters=64,kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=64,kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)),
-
-        tf.keras.layers.Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)),
-
-        tf.keras.layers.Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)),
-
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)),
-
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"),
-        tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)),
-
-        tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(units=4096,activation="relu"),
-        tf.keras.layers.Dense(units=4096,activation="relu"),  
+       base_model,
+    	tf.keras.layers.Flatten(),
         tf.keras.layers.Dense(NUM_CLASSES, activation=tf.keras.activations.softmax)
     ])
      
@@ -133,7 +108,7 @@ def main():
     model = build_model()
 
     model.compile(
-        optimizer=keras.optimizers.sgd(lr=0.0000002, momentum=0.9),
+        optimizer=keras.optimizers.sgd(lr=0.00000007, momentum=0.9),
         loss=tf.keras.losses.categorical_crossentropy,
         metrics=[tf.keras.metrics.categorical_accuracy],
         target_tensors=[train_labels]
@@ -142,13 +117,14 @@ def main():
     log_dir='{}/xray-{}'.format(LOG_DIR, time.time())
     model.fit(
         (train_images, train_labels),
-        epochs=200, 
+        epochs=95, 
         steps_per_epoch=int(np.ceil(TRAINSET_SIZE / float(BATCH_SIZE))),
         callbacks=[
             tf.keras.callbacks.TensorBoard(log_dir),
             Validation(log_dir, validation_files=glob.glob(args.test), batch_size=BATCH_SIZE)
         ]
     )
+    model.save('mymodel.h5')
 
 
 if __name__ == '__main__':
