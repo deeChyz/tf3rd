@@ -5,7 +5,7 @@ Third lab SMOMI
 Параметры:
     ```BATCH_SIZE = 8 *** lr=0.0000002 ```
 
-[!Image alt](https://github.com/deeChyz/tf3rd/blob/master/1st.jpg)
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/1st.jpg)
 
 Ссылка на коммит по первому этапу -- https://github.com/deeChyz/tf3rd/commit/970754563efbf50d823cac6d163d368963a79f90
 
@@ -15,7 +15,7 @@ Third lab SMOMI
     ```BATCH_SIZE = 8 *** lr=0.00000007 ```
     
 
-[!Image alt](https://github.com/deeChyz/tf3rd/blob/master/2nd.jpg)
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/2nd.jpg)
 
 Ссылка на коммит по второму этапу -- https://github.com/deeChyz/tf3rd/commit/9c8a8364f6cb424e7e0bc24981727acdeac8a4b7
 
@@ -25,6 +25,6 @@ Third lab SMOMI
     ```BATCH_SIZE = 8 *** lr=0.000000000011 ```
     
 
-[!Image alt](https://github.com/deeChyz/tf3rd/blob/master/3rd(b).jpg)
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/3rd(b).jpg)
 
 Ссылка на коммит по третьему этапу -- https://github.com/deeChyz/tf3rd/commit/91ab36f655f7361ac2804bb7e922ebee513d016d
