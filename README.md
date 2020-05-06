@@ -21,10 +21,20 @@ Third lab SMOMI
 
 2. На втором же этапе мы проводили обучение классификатора на предобученной на imagenet сети VGG16. В сети были заморожены сверточные слои.
 Параметры:
-    ```BATCH_SIZE = 8 *** lr=0.00000007 ```
-    
+    ```BATCH_SIZE = 8 *** lr=0.00000007 ```    
 
 ![Image alt](https://github.com/deeChyz/tf3rd/blob/master/2nd.jpg)
+
+Параметры:
+    ```BATCH_SIZE = 8 *** lr=0.0000001 ```    
+
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/noSmoothing/2nd(b).jpg)
+
+Параметры:
+    ```BATCH_SIZE = 8 *** lr=0.000001 ```    
+
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/noSmoothing/2nd(c).jpg)
+
 
 Ссылка на коммит по второму этапу -- https://github.com/deeChyz/tf3rd/commit/9c8a8364f6cb424e7e0bc24981727acdeac8a4b7
 
@@ -47,6 +57,11 @@ Third lab SMOMI
 На третий раз я пришел к тому, что надо увеличить learning rate и кол-во эпох в определенном соотношение, чтобы сеть неначала переобучаться на определенном этапе. С параметрами ```BATCH_SIZE = 8 *** lr=0.000000000022 ``` у меня получились следующие графики:
 
 ![Image alt](https://github.com/deeChyz/tf3rd/blob/master/3rd(a).jpg)
+
+Без сглаживания: 
+
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/noSmoothing/3rd(a).jpg)
+
 К сожалению, я опять неправильно выставил параметры и получил переобученную сеть.
 
 
@@ -54,6 +69,10 @@ Third lab SMOMI
     
 
 ![Image alt](https://github.com/deeChyz/tf3rd/blob/master/3rd(b).jpg)
+
+Без сглаживания: 
+
+![Image alt](https://github.com/deeChyz/tf3rd/blob/master/noSmoothing/3rd(b).jpg)
 
 Итоговые параметры: ```BATCH_SIZE = 8 *** lr=0.000000000011 ```
 
